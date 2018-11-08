@@ -1,0 +1,12 @@
+{
+    "name": "iot-json-creator",
+    "keywords": "",
+    "description": "A liberary to make creating the jsons for iot-data-saver easier",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/SirCremefresh/iot-json-creator.git"
+    },
+    "version": "1.0",
+    "frameworks": "arduino",
+    "platforms": "*"
+}
