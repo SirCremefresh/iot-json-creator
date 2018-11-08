@@ -20,7 +20,7 @@ char *createJson(const char *type, const char *place, const char *sensorName, co
     return createJson(type, place, sensorName, isChangeEvt, valueStr);
 }
 
-char *createJson(const char *type, const char *place, const char *sensorName, const bool value, const bool isChangeEvt)
+char *createJson(const char *type, const char *place, const char *sensorName, const float value, const bool isChangeEvt)
 {
     char valueStr[20];
     dtostrf(value, 20, 6, valueStr);
