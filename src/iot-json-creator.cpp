@@ -1,7 +1,7 @@
 #include "iot-json-creator.h"
 #include "Arduino.h"
 
-const char *jsonTemplate = "{\"type\":\"%s\", \"place\":\"%s\", \"sensorName\": \"%s\", \"isChangeEvt\": %s, \"value\": %s} ";
+const char *jsonTemplate = "{\"type\":\"%s\", \"place\":\"%s\", \"sensorName\": \"%s\", \"isChangeEvt\": %s, \"value\": %s}";
 const char *trueStr = "true";
 const char *falseStr = "false";
 
