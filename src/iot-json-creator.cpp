@@ -5,7 +5,7 @@ const char *jsonTemplate = "{\"type\":\"%s\", \"place\":\"%s\", \"sensorName\": 
 const char *trueStr = "true";
 const char *falseStr = "false";
 
-char *createJson(const char *type, const char *place, const char *sensorName, const char *value, const bool isChangeEvt)
+char *bmw12::createJson(const char *type, const char *place, const char *sensorName, const char *value, const bool isChangeEvt)
 {
     const char *isChangeEvtStr = (isChangeEvt) ? trueStr : falseStr;
     int lenght = strlen(type) + strlen(place) + strlen(sensorName) + strlen(isChangeEvtStr) + strlen(value);
@@ -14,15 +14,15 @@ char *createJson(const char *type, const char *place, const char *sensorName, co
     return outString;
 }
 
-char *createJson(const char *type, const char *place, const char *sensorName, const bool value, const bool isChangeEvt)
+char *bmw12::createJson(const char *type, const char *place, const char *sensorName, const bool value, const bool isChangeEvt)
 {
     const char *valueStr = (value) ? trueStr : falseStr;
-    return createJson(type, place, sensorName, valueStr, isChangeEvt);
+    return bmw12::createJson(type, place, sensorName, valueStr, isChangeEvt);
 }
 
-char *createJson(const char *type, const char *place, const char *sensorName, const float value, const bool isChangeEvt)
+char *bmw12::createJson(const char *type, const char *place, const char *sensorName, const float value, const bool isChangeEvt)
 {
     char valueStr[20];
     dtostrf(value, 20, 6, valueStr);
-    return createJson(type, place, sensorName, valueStr, isChangeEvt);
+    return bmw12::createJson(type, place, sensorName, valueStr, isChangeEvt);
 }
