@@ -2,7 +2,7 @@
 #include "Arduino.h"
 
 const char *jsonTemplate = "{\"type\":\"%s\", \"place\":\"%s\", \"sensorName\": \"%s\", \"isChangeEvt\": %s, \"value\": %s}";
-const int jsonTemplateLen = sizeof(jsonTemplate) / sizeof(char);
+const int jsonTemplateLen = strlen(jsonTemplate);
 const char *trueStr = "true";
 const char *falseStr = "false";
 
