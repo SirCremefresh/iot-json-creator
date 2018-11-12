@@ -1,29 +1,60 @@
 #include "iot-json-creator.h"
 #include "Arduino.h"
+#include "utility"
+#include "vector"
 
-const char *jsonTemplate = "{\"type\":\"%s\", \"arduinoName\":\"%s\", \"place\":\"%s\", \"sensorName\": \"%s\", \"isChangeEvt\": %s, \"value\": %s}";
-const int jsonTemplateLen = strlen(jsonTemplate);
 const char *trueStr = "true";
 const char *falseStr = "false";
 
-char *bmw12::createJson(const char *type, const char *arduinoName, const char *place, const char *sensorName, const char *value, const bool isChangeEvt)
+String *bmw12::createJson(const std::vector<std::pair<const String, const String>> keyValues)
 {
-    const char *isChangeEvtStr = (isChangeEvt) ? trueStr : falseStr;
-    int lenght = jsonTemplateLen + strlen(type) + strlen(arduinoName) + strlen(place) + strlen(sensorName) + strlen(isChangeEvtStr) + strlen(value);
-    char *outString = (char *)malloc(sizeof(char) * (lenght + 1));
-    sprintf(outString, jsonTemplate, type, place, sensorName, isChangeEvtStr, value);
+    String *outString = new String("{");
+    for (std::pair<String, String> keyValue : keyValues)
+    {
+        *outString += "\"" + keyValue.first + "\":";
+        *outString += keyValue.second + ",";
+    }
+    outString->remove(outString->length() - 1);
+    *outString += "}";
+
     return outString;
 }
 
-char *bmw12::createJson(const char *type, const char *arduinoName, const char *place, const char *sensorName, const bool value, const bool isChangeEvt)
+String *bmw12::createJson(const String type, const String place, const String arduinoName)
 {
-    const char *valueStr = (value) ? trueStr : falseStr;
+    std::vector<std::pair<const String, const String>> keyValues;
+
+    keyValues.push_back(std::pair<const String, const String>("type", "\"" + type + "\""));
+    keyValues.push_back(std::pair<const String, const String>("arduinoName", "\"" + arduinoName + "\""));
+    keyValues.push_back(std::pair<const String, const String>("place", "\"" + place + "\""));
+
+    return bmw12::createJson(keyValues);
+}
+
+String *bmw12::createJson(const String type, const String place, const String arduinoName, const String sensorName, const String value, const bool isChangeEvt)
+{
+    const String isChangeEvtStr = (isChangeEvt) ? "true" : "false";
+    std::vector<std::pair<const String, const String>> keyValues;
+
+    keyValues.push_back(std::pair<const String, const String>("type", "\"" + type + "\""));
+    keyValues.push_back(std::pair<const String, const String>("arduinoName", "\"" + arduinoName + "\""));
+    keyValues.push_back(std::pair<const String, const String>("place", "\"" + place + "\""));
+
+    keyValues.push_back(std::pair<const String, const String>("sensorName", "\"" + sensorName + "\""));
+    keyValues.push_back(std::pair<const String, const String>("isChangeEvt", isChangeEvtStr));
+    keyValues.push_back(std::pair<const String, const String>("value", value));
+
+    return bmw12::createJson(keyValues);
+}
+
+String *bmw12::createJson(const String type, const String place, const String arduinoName, const String sensorName, const bool value, const bool isChangeEvt)
+{
+    const String valueStr = (value) ? "true" : "false";
     return bmw12::createJson(type, arduinoName, place, sensorName, valueStr, isChangeEvt);
 }
 
-char *bmw12::createJson(const char *type, const char *arduinoName, const char *place, const char *sensorName, const float value, const bool isChangeEvt)
+String *bmw12::createJson(const String type, const String place, const String arduinoName, const String sensorName, const float value, const bool isChangeEvt)
 {
-    char valueStr[20];
-    dtostrf(value, 20, 6, valueStr);
+    const String valueStr(value);
     return bmw12::createJson(type, arduinoName, place, sensorName, valueStr, isChangeEvt);
 }
