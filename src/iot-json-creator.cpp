@@ -27,6 +27,7 @@ String *bmw12::createJson(const String type, const String place, const String ar
     keyValues.push_back(std::pair<const String, const String>("type", "\"" + type + "\""));
     keyValues.push_back(std::pair<const String, const String>("arduinoName", "\"" + arduinoName + "\""));
     keyValues.push_back(std::pair<const String, const String>("place", "\"" + place + "\""));
+    keyValues.push_back(std::pair<const String, const String>("isChangeEvt", "true"));
 
     return bmw12::createJson(keyValues);
 }
