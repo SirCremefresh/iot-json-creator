@@ -51,11 +51,11 @@ String *bmw12::createJson(const String type, const String place, const String ar
 String *bmw12::createJson(const String type, const String place, const String arduinoName, const String sensorName, const bool value, const bool isChangeEvt)
 {
     const String valueStr = (value) ? "true" : "false";
-    return bmw12::createJson(type, arduinoName, place, sensorName, valueStr, isChangeEvt);
+    return bmw12::createJson(type, place, arduinoName, sensorName, valueStr, isChangeEvt);
 }
 
 String *bmw12::createJson(const String type, const String place, const String arduinoName, const String sensorName, const float value, const bool isChangeEvt)
 {
     const String valueStr(value);
-    return bmw12::createJson(type, arduinoName, place, sensorName, valueStr, isChangeEvt);
+    return bmw12::createJson(type, place, arduinoName, sensorName, valueStr, isChangeEvt);
 }
